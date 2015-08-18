@@ -1,12 +1,15 @@
 <?php
-# User authentication / session script.
+// User authentication / session script.
 include_once("src/authenticate.php");
-a2_session_test();
-# Included for technical marking purposes - comment back in on submission
+#a2_session_test();
+a2_session_init();
+a2_auth_init("Alice", "whi73r4bbit");
+a2_auth_test();
+// Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
 
 <?php
-# Content include files
+// Content include files
 include_once("inc/header.html");
 include_once("inc/navigation.html"); ?>
 
