@@ -1,0 +1,254 @@
+/* Main CSS */
+
+body, body * {
+	margin:0;
+	font-family: 'Helvetica';
+}
+
+li {
+	line-height: 18px;
+}
+
+aside {
+	float:left;
+	overflow: hidden;
+	width: 40%;
+	margin-left: -15px;
+	margin-top: 20px;
+	margin-right: 30px;
+}
+
+aside img {
+	height: 400px;
+}
+
+/***** Header *****/
+
+header {
+	background-color: #FFF;
+	clear: both;
+	margin: 0 auto;
+  	padding: 10px 0 8px 0;
+}
+
+header h3 {
+	color: orange;
+}
+
+header a {
+	color: #464646;
+}
+
+section h1 {
+	margin-top: 1em;
+	font-size: 20px;
+  	font-weight: normal;
+	text-transform: uppercase;
+}
+
+#name {
+	float: left;
+  	color: #fff;
+  	overflow: hidden;
+  	font-size: 16px;
+  	margin: 16px 0 10px 0;
+  	width: 404px;
+  	height: 40px;
+}
+
+#name a {
+	display: block;
+  	border: none;
+  	color: #202020;
+  	height: 55px;
+  	font-size: 25px;
+  	text-decoration: none;
+	text-transform: uppercase;
+	font-family: "Helvetica";
+}
+
+/***** Navigation *****/
+
+nav {
+	float: left;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin:0 auto;
+}
+
+nav ul {
+	margin: 20px;
+}
+
+nav ul li {
+	display:inline;
+	margin: 0;
+}
+
+nav li a, nav li a:visited,
+nav li a:hover, nav li a:active {
+	color: #808080;
+	text-decoration: overline;
+	text-transform: uppercase;
+  	font-size: 16px;
+  	float: left;
+  	padding: .2em .5em;
+	font-family: 'Helvetica';
+}
+
+nav li a:hover, nav li a:active {
+	color: #212121;
+	text-decoration: underline;
+}
+
+/***** Main Content *****/
+
+main {
+	position: relative;
+	margin-bottom: 150px;
+	left: 0;
+}
+
+main section {
+	margin-top:15px;
+}
+
+article {
+	margin: 15px 0;
+}
+
+#banner {
+	background-color: #e0e0e0;
+	height: 300px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#banner img {
+	width: 1170px;
+	position: relative;
+	top: -100px;
+}
+
+#copy {
+	padding-left: 20px;
+	padding-right: 200px;
+}
+
+#copy h3 {
+	margin-top: 1em;
+	font-size: 16px;
+  	font-weight: normal;
+}
+
+#copy p {
+	font-style: italic;
+}
+
+/***** Products *****/
+
+#product-list {
+	list-style: none;
+	margin-left: -26px;
+}
+
+#product-list li {
+	float: left;
+  	margin: 0 0 18px 26px;
+}
+
+.product-meta {
+	line-height: 2em;
+}
+
+.product-meta h2 {
+	line-height: 1.2em;
+	font-size: 1.5rem;
+	font-family: Helvetica, sans-serif;
+	text-transform: uppercase;
+}
+
+#product-list li img {
+	width: 192px;
+	margin-bottom: 10px;
+}
+
+small {
+	display: block;
+	text-transform: uppercase;
+	font-size: 10px;
+}
+
+.price {
+	text-align: right;
+	font-style: italic;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#purchase-form {
+	color: #000;
+	padding: 1em;
+	line-height: 1.6em;
+	font-size: 15px;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	float: right;
+	width: 50%;
+}
+
+.form-group input.btn {
+	width: 32px;
+}
+
+.btn-primary {
+	background-color: #000;
+	border-color: #c0c0c0;
+}
+
+/***** News Section *****/
+
+.title {
+	margin-bottom:8px;
+}
+
+/***** Form Elements *****/
+
+form div {
+	margin:8px 0;
+}
+
+input:invalid {
+  	border-color: #b94a48;
+  	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+input:valid {
+  	border-color: #468847;
+  	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.readonly-input {
+	border: none;
+	background-color: #FFF;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0;
+	display: inline-block;
+}
+
+/***** Footer *****/
+
+footer {
+	border-top: 1px solid #000;
+	background-color: #202020;
+	color:#c0c0c0;
+	position: fixed;
+	bottom: 0; left: 0;
+	height:120px;
+	width: 100%;
+	padding: 5px;
+}
