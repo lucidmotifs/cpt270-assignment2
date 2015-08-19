@@ -47,13 +47,13 @@ function a2_session_init() {
     } else {
 
       // Set guest user variables
-      $_SESSION['user']['first_name'] = "Guest";
-      $_SESSION['user']['last_name'] = "Guest";
-      $_SESSION['user']['email'] = "guest@bridgetoofar.com";
-      $_SESSION['user']['phone'] = "0";
-      $_SESSION['user']['d1'] = 0;
-      $_SESSION['user']['d2'] = 0;
-      $_SESSION['user']['d3'] = 0;
+      $_SESSION['user']['FirstName'] = "Guest";
+      $_SESSION['user']['LastName'] = "Guest";
+      $_SESSION['user']['Email'] = "guest@bridgetoofar.com";
+      $_SESSION['user']['Phone'] = "0";
+      $_SESSION['user']['Discount-PS1'] = 0;
+      $_SESSION['user']['Discount-PS2'] = 0;
+      $_SESSION['user']['Discount-PS3'] = 0;
 
       return;
     }

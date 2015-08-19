@@ -16,6 +16,24 @@
   	<!-- Header Section -->
   	<header id="page-header" class="container">
 
+      <div id="user">
+        <span>Browsing as:
+          <strong><?php echo $_SESSION['user']['FirstName'] ?></strong> </span>
+        <?php if ($_SESSION['auth']) { ?>
+          <a href="logout.php">(Logout)</a>
+        <?php } else { ?>
+          <a href="login.php">(Login)</a>
+        <?php } ?>
+        <a href="cart.php">
+          <img alt="Shopping Cart"
+               src="img/orange-shopping-cart-hi.png"
+               width="20px">
+          <!-- Show number of cart items user currently has -->
+          (<?php isset( $_SESSION['cart']['items'] ) ?
+                    count($_SESSION['cart']['items']) :
+                    '0'; ?>)
+        </a>
+
       <div id="name">
         <a href="index.html">A Bridge Too Far</a>
-      </div>      
+      </div>

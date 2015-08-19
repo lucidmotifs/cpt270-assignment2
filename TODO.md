@@ -7,9 +7,16 @@ SESSION DATA
 - Add a check to see if user is logged on and set session variable to reflect. -
 - Create log-on function. -
 - Load user data in from file. -
-- Add UI element at the top of every page that reflects the current auth state.
+- Add UI element at the top of every page that reflects the current auth state. -
 - Add cart element to the user auth UI element at top of page.
 - Log-out function.
+
+USER MANAGEMENT
+
+- Add log-in form pop-up window.
+- Create login.php page.
+- Add AJAX script to do login in-line on page.
+- Add log-out section to script/AJAX handler.
 
 PRODUCTS PAGE
 
