@@ -17,9 +17,16 @@ USER MANAGEMENT
 - Create login.php handler. -
 - Add AJAX script to do login in-line on page. -
 - Add log-out section to script/AJAX handler.
+- Change AJAX handler to take user details as result (return session varibles).
+- Only update the user details section of the page.
 
 PRODUCTS PAGE
 
 - Convert product element to template.
 - Create Array of products via PHP include (src).
 - Apply icon / discount to first 3 products.
+
+CART PAGE
+
+- Add Cart Session variable
+- Create table of products in cart with price / quantity

@@ -1,5 +1,10 @@
 <?php
-# Included for technical marking purposes - comment back in on submission
+// User authentication / session script.
+include_once("src/authenticate.php");
+
+a2_session_init();
+
+// Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
 
 <?php
@@ -27,101 +32,71 @@ include_once("inc/navigation.html"); ?>
 
     <ul id="product-list">
 
+<?php
+// Create products
+$products = [
+  'id' => 1,
+  'name' => 'Golden Gate Bridge',
+  'img' => 'img/golden-gate.jpg',
+  'loc' => 'San Francisco',
+  'meta' => 'Landmarks',
+  'price' => '24000000',
+],[
+  'id' => 2,
+  'name' => 'London Bridge',
+  'img' => 'img/london-bridge.jpg',
+  'loc' => 'London',
+  'meta' => 'City Bridges',
+  'price' => '50000000',
+],[
+  'id' => 3,
+  'name' => 'Brooklyn Bridge',
+  'img' => 'img/brooklyn-bridge.jpg',
+  'loc' => 'New York',
+  'meta' => 'Large Bridges',
+  'price' => '42000000',
+],[
+  'id' => 4,
+  'name' => 'Harbour Bridge',
+  'img' => 'img/harbour-bridge.jpg',
+  'loc' => 'Sydney',
+  'meta' => 'Landmarks',
+  'price' => '99000000',
+],[
+  'id' => 5,
+  'name' => 'Millau Viaduct',
+  'img' => 'img/millau-viaduct.jpg',
+  'loc' => 'France',
+  'meta' => 'Modern Wonders',
+  'price' => '4238000000',
+];
+
+foreach ($product as $p) {
+?>
+
+      <!-- Product Template -->
       <li>
-        <a href="single_product.html">
+        <a href="products.php?p=<?= $p['id']; ?>">
           <!-- Image used under fair use for academic purposes -->
-          <img alt="Golden Gate Bridge" src="img/golden-gate.jpg">
+          <img alt="<?= $p['name']; ?>" src="<?= $p['img']; ?>">
         </a>
         <div class="product-meta">
           <h2>
-            <a href="/single_product.html">
-              Golden Gate Bridge
+            <a href="products.php?p=<?= $p['id']; ?>">
+              <?= $p['name']; ?>
             </a>
           </h2>
-          <small class="loc-small">San Francisco</small>
-          <small>Landmarks</small>
+          <small class="loc-small"><?= $p['loc'] ?></small>
+          <small><?= $p['meta'] ?></small>
           <div class="row-fluid">
-            <div class="price">24,000,000 AUD</div>
+            <div class="price"><?= number_format($p['price']) ?> AUD</div>
             <div class="pull-right"></div>
           </div>
         </div>
       </li>
 
-      <li>
-        <a href="single_product.html">
-          <!-- Image used under fair use for academic purposes -->
-          <img alt="London Bridge" src="img/london-bridge.jpg">
-        </a>
-        <div class="product-meta">
-          <h2>
-            <a href="single_product.html">
-              London Bridge
-            </a>
-          </h2>
-          <small class="loc-small">London</small>
-          <small>City Bridges</small>
-          <div class="row-fluid">
-            <div class="span4 price">50,000,000 AUD</div>
-          </div>
-        </div>
-      </li>
+<?= } ?>
 
-      <li>
-        <a href="single_product.html">
-          <!-- Image used under fair use for academic purposes -->
-          <img alt="Brooklyn Bridge" src="img/brooklyn-bridge.jpg">
-        </a>
-        <div class="product-meta">
-          <h2>
-            <a href="single_product.html">
-              Brooklyn Bridge
-            </a>
-          </h2>
-          <small class="loc-small">New York</small>
-          <small>Large Bridges</small>
-          <div class="row-fluid">
-            <div class="price">42,000,000 AUD</div>
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <a href="single_product.html">
-          <!-- Image used under fair use for academic purposes -->
-          <img alt="Sydney Harbour Bridge" src="img/harbour-bridge.jpg">
-        </a>
-        <div class="product-meta">
-          <h2>
-            <a href="single_product.html">
-              Harbour Bridge
-            </a>
-          </h2>
-          <small class="loc-small">Sydney</small>
-          <small>Landmarks</small>
-          <div class="row-fluid">
-            <div class="price">99,000,000 AUD</div>
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <a href="single_product.html">
-          <!-- Image used under fair use for academic purposes -->
-          <img alt="Millau Viaduct" src="img/millau-viaduct.jpg">
-        </a>
-        <div class="product-meta">
-          <h2>
-            <a href="single_product.html">
-              Millau Viaduct
-            </a>
-          </h2>
-          <small class="loc-small">France</small>
-          <small>Modern Wonders</small>
-          <div class="row-fluid">
-            <div class="price">4,238,000,000 AUD</div>
-          </div>
-        </div>
-      </li>
     </ul>
   </section>
 
