@@ -14,8 +14,8 @@ SESSION DATA
 USER MANAGEMENT
 
 - Add log-in form pop-up window. -
-- Create login.php handler.
-- Add AJAX script to do login in-line on page.
+- Create login.php handler. -
+- Add AJAX script to do login in-line on page. -
 - Add log-out section to script/AJAX handler.
 
 PRODUCTS PAGE
