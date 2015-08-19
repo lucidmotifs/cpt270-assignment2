@@ -61,21 +61,34 @@ function a2_session_init() {
 }
 
 function a2_import_user_list() {
+  // Create keys (prefer these to using header row)
+  $keys = array(
+    "FirstName",
+    "LastName",
+    "Email",
+    "password",
+    "crypt",
+    "Phone",
+    "Discount-PS1",
+    "Discount-PS2",
+    "Discount-PS3",
+  );
+
   // Open customers.txt file and return array of data.
+  $row = 1;
+  $store = array();
+  if (($handle = fopen("data/customers.txt", "r")) !== false) {
+      while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
+        $num = count($data);
+        $row++;
+        for ($c=0; $c < $num; $c++) {
+          $store[$row][$keys[$c]] = $data[$c];
+        }
+      }
+      fclose($handle);
+  }
 
-  // return dummy data for now.
-  $data[0] = [
-    "FirstName" => "Alice",
-    "LastName" => "Liddell",
-    "Email" => "alice@wonderland.com",
-    "crypt" => '$1$7PggNm.5$Y0cLU4ADlrJcyefBjVpW11',
-    "Phone" => "(04) 8765 4321",
-    "Discount-PS1" => "3",
-    "Discount-PS2" => "4",
-    "Discount-PS3" => "9",
-  ];
-
-  return $data;
+  return $store;
 }
 
 # Return True if the credentials match a user, false otherwise.
