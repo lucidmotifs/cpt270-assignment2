@@ -29,9 +29,10 @@
                src="img/orange-shopping-cart-hi.png"
                width="20px">
           <!-- Show number of cart items user currently has -->
-          (<?php isset( $_SESSION['cart']['items'] ) ?
-                    count($_SESSION['cart']['items']) :
-                    '0'; ?>)
+          (<?php $i = isset( $_SESSION['cart']['items'] ) ?
+                      count($_SESSION['cart']['items']) :
+                      '0';
+            echo $i; ?>)
         </a>
 
       <div id="name">

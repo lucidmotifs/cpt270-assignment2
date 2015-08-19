@@ -118,6 +118,32 @@ function a2_auth_init($username, $password) {
   return $match;
 }
 
+function a2_auth_end() {
+  // destroy the session and reset all variables.
+  $_SESSION = array();
+
+  ## The below code was sourced from:
+  ## http://php.net/manual/en/function.session-destroy.php
+  ## for academic pruposes
+
+  // If it's desired to kill the session, also delete the session cookie.
+  // Note: This will destroy the session, and not just the session data!
+  if (ini_get("session.use_cookies")) {
+      $params = session_get_cookie_params();
+      setcookie(session_name(), '', time() - 42000,
+          $params["path"], $params["domain"],
+          $params["secure"], $params["httponly"]
+      );
+  }
+
+  ## End sourced code
+
+  session_destroy();
+
+  // Now we want to re-start the session as a Guest user.
+  a2_session_init();
+}
+
 function a2_auth_test() {
   if ( isset( $_SESSION['auth'] ) && $_SESSION['auth'] ) {
     echo $_SESSION['auth']; echo " : ";
