@@ -10,6 +10,16 @@
       href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"
       rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+
+    <script>
+      function popup(showhide) {
+        if(showhide == "show") {
+          document.getElementById('login').style.display="block";
+        } else if (showhide == "hide") {
+          document.getElementById('login').style.display="none";
+        }
+      }
+    </script>
   </head>
   <body>
 
@@ -22,7 +32,7 @@
         <?php if ($_SESSION['auth']) { ?>
           <a href="logout.php">(Logout)</a>
         <?php } else { ?>
-          <a href="login.php">(Login)</a>
+          <a href="javascript:popup('show');p">(Login)</a>
         <?php } ?>
         <a href="cart.php">
           <img alt="Shopping Cart"
@@ -34,6 +44,19 @@
                       '0';
             echo $i; ?>)
         </a>
+      </div>
+
+      <div id="login" style="display:none;position:absolute;border:solid 1px #000;top:100px;z-index:10;">
+        <form name="login" action="" method="post">
+          <label for="username">Username:</label>
+          <center><input name="username" size="14" /></center>
+          <label for="password">Password:</label>
+          <center><input name="password" type="password" size="14" /></center>
+          <center><input type="submit" name="submit" value="login" /></center>
+        </form>
+        <br />
+        <center><a href="javascript:popup('hide');">close</a></center>
+      </div>
 
       <div id="name">
         <a href="index.html">A Bridge Too Far</a>

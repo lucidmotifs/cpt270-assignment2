@@ -41,11 +41,11 @@ function a2_session_init() {
     return;
   } else {
     // No user loogged on, check guest variables set
-    if ( isset ( $_SESSION['first_name'] ) && $_SESSION['first_name'] == 'Guest' ) {
+    if ( isset ( $_SESSION['FirstName'] ) && $_SESSION['FirstName'] == 'Guest' ) {
       $_SESSION['level'] = '1';
       return;
     } else {
-
+      $_SESSION['auth'] = false;
       // Set guest user variables
       $_SESSION['user']['FirstName'] = "Guest";
       $_SESSION['user']['LastName'] = "Guest";
