@@ -22,9 +22,10 @@ USER MANAGEMENT
 
 PRODUCTS PAGE
 
-- Convert product element to template.
-- Create Array of products via PHP include (src).
-- Apply icon / discount to first 3 products.
+- Convert product element to template. -
+- Create Array of products via PHP include (src). -
+- Apply icon / discount to first 3 products. -
+- Show single product page when product ID is set.
 
 CART PAGE
 

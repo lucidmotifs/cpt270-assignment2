@@ -34,13 +34,14 @@ include_once("inc/navigation.html"); ?>
 
 <?php
 // Create products
-$products = [
+$products = array([
   'id' => 1,
   'name' => 'Golden Gate Bridge',
   'img' => 'img/golden-gate.jpg',
   'loc' => 'San Francisco',
   'meta' => 'Landmarks',
   'price' => '24000000',
+  'discounted' => true,
 ],[
   'id' => 2,
   'name' => 'London Bridge',
@@ -48,6 +49,7 @@ $products = [
   'loc' => 'London',
   'meta' => 'City Bridges',
   'price' => '50000000',
+  'discounted' => true,
 ],[
   'id' => 3,
   'name' => 'Brooklyn Bridge',
@@ -55,6 +57,7 @@ $products = [
   'loc' => 'New York',
   'meta' => 'Large Bridges',
   'price' => '42000000',
+  'discounted' => true,
 ],[
   'id' => 4,
   'name' => 'Harbour Bridge',
@@ -62,6 +65,7 @@ $products = [
   'loc' => 'Sydney',
   'meta' => 'Landmarks',
   'price' => '99000000',
+  'discounted' => false,
 ],[
   'id' => 5,
   'name' => 'Millau Viaduct',
@@ -69,9 +73,17 @@ $products = [
   'loc' => 'France',
   'meta' => 'Modern Wonders',
   'price' => '4238000000',
-];
+  'discounted' => false,
+]);
 
-foreach ($product as $p) {
+foreach ($products as $p) {
+  if ( isset($_SESSION['auth']) ) {
+    // If logged on as a user and the product is set to discounted
+    if ( ( $_SESSION['auth'] ) && ( $p['discounted'] ) ) {
+      // Apply applicable discount
+      $p['price'] *= (100 - $_SESSION['user']["Discount-PS" . $p['id']]) / 100;
+    }
+  }
 ?>
 
       <!-- Product Template -->
@@ -89,13 +101,17 @@ foreach ($product as $p) {
           <small class="loc-small"><?= $p['loc'] ?></small>
           <small><?= $p['meta'] ?></small>
           <div class="row-fluid">
-            <div class="price"><?= number_format($p['price']) ?> AUD</div>
+            <div class="price">
+              <?= number_format($p['price']) ?> AUD
+              <br>
+              <?= ($p['discounted'] && $_SESSION['auth']) ? "Valued member discount: " . $_SESSION['user']["Discount-PS" . $p['id']] . "%" : '' ?>
+            </div>
             <div class="pull-right"></div>
           </div>
         </div>
       </li>
 
-<?= } ?>
+<?php } ?>
 
     </ul>
   </section>
