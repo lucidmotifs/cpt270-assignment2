@@ -13,6 +13,7 @@
 
     <!-- jQuery hosted by google -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/jquery.price_format.2.0.min.js"</script>
 
     <!-- Simple show/hide script for the login form -->
     <script>
@@ -75,27 +76,32 @@
         <?php } else { ?>
           <a href="javascript:popup('show');p">(Login)</a>
         <?php } ?>
-        <a href="cart.php">
+        <a href="order.php">
           <img alt="Shopping Cart"
                src="img/orange-shopping-cart-hi.png"
                width="20px">
           <!-- Show number of cart items user currently has -->
-          (<?php $i = isset( $_SESSION['cart']['items'] ) ?
-                      count($_SESSION['cart']['items']) :
-                      '0';
-            echo $i; ?>)
+          (<span id="cartitems">
+            <?= isset( $_SESSION['cart'] ) ?
+                count($_SESSION['cart']) :
+                '0';
+                ?></span>)
         </a>
       </div>
 
       <!-- Log-in Form -->
       <div id="login" style="display:none;position:absolute;border:solid 1px #000;top:100px;z-index:10;background:white;">
         <div class="err" id="add_err"></div>
-        <form action="login.php" method="post">
-          <label for="username">Username:</label>
-          <input name="username" id="username" size="14" />
-          <label for="password">Password:</label>
-          <input name="password" id="password" type="password" size="14" />
-          <input type="submit" name="submit" id="submit" value="login" />
+        <form action="./" method="post">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input name="username" id="username" size="14" />
+            <label for="password">Password:</label>
+            <input name="password" id="password" type="password" size="14" />
+            <button class="btn btn-lg btn-primary" type="submit" name="submit" id="submit">
+              Login
+            </button>
+          </div>
         </form>
         <a href="javascript:popup('hide');">close</a>
       </div>

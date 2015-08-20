@@ -1,0 +1,108 @@
+<?php
+// Duplicate code from product list page - refactor this.
+if ( isset($_SESSION['auth']) ) {
+  // If logged on as a user and the product is set to discounted
+  if ( ( $_SESSION['auth'] ) && ( $p['discounted'] ) ) {
+    // Apply applicable discount
+    $p['price'] *= (100 - $_SESSION['user']["Discount-PS" . $p['id']]) / 100;
+  }
+}
+?>
+
+<aside>
+  <!-- Image used under fair use for academic purposes -->
+  <img src="<?= $p['img']; ?>" alt="<?= $p['name']; ?>">
+</aside>
+
+<section id="purchase-form">
+  <h3><?= $p['name']; ?></h3>
+  <div class="err" id="add_err"></div>
+  <small class="loc-small"><?= $p['loc']; ?></small>
+  <small><?= $p['meta']; ?></small>
+  <p>The Brooklyn Bridge is a hybrid cable-stayed/suspension bridge in New York City
+    and is one of the oldest bridges of either type in the United States.
+    Completed in 1883, it connects the boroughs of Manhattan and Brooklyn by
+    spanning the East River.</p>
+
+  <form action="/" id="addForm">
+    <!-- hidden element for passing product ID -->
+    <input type="hidden" id="productID" name="productID" value="<?= $p['id']; ?>" />
+    <input type="hidden" id="base-price" name="base-price" value="<?= $p['price']; ?>" />
+
+    <div class="form-group">
+      <label for="unit-price">In Stock: </label>
+      <span id="unit-price"><?= $p['price']; ?></span>
+    </div>
+
+    <div class="form-group">
+      <label>Quantity:</label>
+      <input type="button" class="btn-primary btn" value="&#45;" onclick="changeQuantity(-1);"/>
+      <input type="number" id ="qty" name="qty" min="0" max="100" step="1" value="1"
+        onchange="quantityCheck()" required/>
+      <input type="button" class="btn-primary btn" value="&#43;" onclick="changeQuantity(1);"/>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-lg btn-primary" id="add">Add</button>
+    </div>
+  </form>
+</section>
+
+<div id="results"></div>
+
+<!-- some form validation -->
+<script>
+  function changeQuantity(num) {
+    var e = document.getElementById("qty");
+    if (e.value == '') {
+      e.value = 0;
+    }
+    e.value = e.valueAsNumber + num;
+    quantityCheck();
+  }
+
+  function updatePrice() {
+    $("#unit-price").html($("#qty").val() * $("#base-price").val());
+    $("#unit-price").priceFormat({prefix: '$ ', centsLimit: 0});
+  }
+
+  function quantityCheck() {
+    var e = document.getElementById("qty");
+    if (e.valueAsNumber <= 0) {
+      e.value = '';
+    } else {
+      updatePrice();
+    }
+  }
+</script>
+
+<script>
+  // Order submission AJAX Handler
+  $(document).ready(function() {
+     $("#add_err").css('display', 'none', 'important');
+     $("#addForm").submit(function(e) {
+       e.preventDefault();
+       qty=$("#qty").val();
+       id=$("#productID").val();
+       $.post(
+         "handlers/addproduct.php",
+         { quantity: qty, product: id },
+         function(returnedData, status) {
+           if (status=="success") {
+             $("#results").html(returnedData);
+             // Update user details in future.
+             // Instead of refreshing page or moving to index,
+             // simply update the content of the user details
+             // section by implementing an iframe.
+           } else {
+             $("#add_err").css('display', 'inline', 'important');
+             $("#add_err").html("<img src='img/alert.png' /> Errors");
+           }
+         }).done(function(returnedData) {
+           $("#cartitems").html(returnedData);
+         });
+       });
+    $("#unit-price").priceFormat({prefix: '$ ', centsLimit: 0});
+    return false;
+  });
+</script>

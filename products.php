@@ -22,17 +22,8 @@ include_once("inc/navigation.html"); ?>
 <!-- Content Area -->
 <main class="container">
 
-  <section id="page-title">
-    <h1>Our Products</h1>
-  </section>
-
-  <hr>
-
-  <section id="products">
-
-    <ul id="product-list">
-
 <?php
+
 // Create products
 $products = array([
   'id' => 1,
@@ -76,6 +67,23 @@ $products = array([
   'discounted' => false,
 ]);
 
+if ( isset($_GET['p']) ) {
+  $p = $products[$_GET['p']-1];
+  include_once("inc/product.html");
+} else { ?>
+
+  <section id="page-title">
+    <h1>Our Products</h1>
+  </section>
+
+  <hr>
+
+  <section id="products">
+
+    <ul id="product-list">
+
+<?php
+
 foreach ($products as $p) {
   if ( isset($_SESSION['auth']) ) {
     // If logged on as a user and the product is set to discounted
@@ -84,6 +92,7 @@ foreach ($products as $p) {
       $p['price'] *= (100 - $_SESSION['user']["Discount-PS" . $p['id']]) / 100;
     }
   }
+
 ?>
 
       <!-- Product Template -->
@@ -115,6 +124,8 @@ foreach ($products as $p) {
 
     </ul>
   </section>
+
+<?php } // end of single product view else clause ?>
 
 </main>
 

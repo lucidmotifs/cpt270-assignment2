@@ -46,6 +46,7 @@ function a2_session_init() {
       return;
     } else {
       $_SESSION['auth'] = false;
+      $_SESSION['cart'] = array();
       // Set guest user variables
       $_SESSION['user']['FirstName'] = "Guest";
       $_SESSION['user']['LastName'] = "Guest";
@@ -106,6 +107,7 @@ function a2_auth_init($username, $password) {
 
       // Initialise Session variables;
       $_SESSION['auth'] = true;
+      $_SESSION['cart'] = array();
       $_SESSION['user'] = $user;
 
       break;
