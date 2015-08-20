@@ -31,7 +31,7 @@ include_once("inc/navigation.html"); ?>
 
   <section id="shop-cart">
 
-    <form id="order-form" method="post" action="order.php">
+    <form id="order-form" method="post" action="checkout.php">
       <table id="order-list">
         <tr>
           <th width="60%">Item</th>
@@ -115,3 +115,9 @@ foreach (a2_cart_tabulate($products) as $item) {
         });
     }
   </script>
+
+</main>
+
+<?php
+# Footer include file
+include_once("inc/footer.html"); ?>
