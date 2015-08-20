@@ -22,6 +22,24 @@ aside img {
 	height: 400px;
 }
 
+table {
+	margin-left: 30px;
+	width: 80%;
+	border-bottom:1px dotted #CECECE;
+}
+
+table th {
+	border-bottom:1px dotted #CECECE;
+}
+
+table td {
+	line-height: 24px;
+}
+
+table td.right {
+	text-align: right;
+}
+
 /***** Header *****/
 
 header {
@@ -204,6 +222,26 @@ small {
 .btn-primary {
 	background-color: #000;
 	border-color: #c0c0c0;
+}
+
+/***** Order Page ******/
+
+#total-cost {
+	float:right;
+	margin-right:20%;
+	margin-top: 15px;
+}
+
+span.heading {
+	font-family:Arial;
+	font-weight:bold;
+}
+
+span.value {
+	font-family:Arial;
+	margin-left:8px;
+	font-weight:600;
+	color:#45C;
 }
 
 /***** News Section *****/

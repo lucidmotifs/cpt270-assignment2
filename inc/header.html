@@ -13,7 +13,7 @@
 
     <!-- jQuery hosted by google -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/jquery.price_format.2.0.min.js"</script>
+    <script src="js/jquery.price_format.2.0.min.js"></script>
 
     <!-- Simple show/hide script for the login form -->
     <script>
@@ -74,18 +74,14 @@
         <?php if ($_SESSION['auth']) { ?>
           <a href="logout.php">(Logout)</a>
         <?php } else { ?>
-          <a href="javascript:popup('show');p">(Login)</a>
+          <a href="javascript:popup('show');">(Login)</a>
         <?php } ?>
         <a href="order.php">
           <img alt="Shopping Cart"
                src="img/orange-shopping-cart-hi.png"
                width="20px">
           <!-- Show number of cart items user currently has -->
-          (<span id="cartitems">
-            <?= isset( $_SESSION['cart'] ) ?
-                count($_SESSION['cart']) :
-                '0';
-                ?></span>)
+          (<span id="cartitems"><?= isset( $_SESSION['cart'] ) ? count($_SESSION['cart']) : '0'; ?></span>)
         </a>
       </div>
 
@@ -108,5 +104,5 @@
 
       <!-- Site Name / Banner -->
       <div id="name">
-        <a href="index.html">A Bridge Too Far</a>
+        <a href="index.php">A Bridge Too Far</a>
       </div>
