@@ -20,7 +20,15 @@ include_once("inc/navigation.html"); ?>
   <img src="img/banner-bridge.jpg">
 </section>
 
+<!-- Content Area -->
+<main class="container">
+
 <?php if (!empty($_POST['submit'])): ?>
+
+<?php
+// Do server-side verification of user input
+
+?>
 
 <!-- Content Area -->
 <main class="container">
@@ -34,7 +42,7 @@ include_once("inc/navigation.html"); ?>
   <section id="receipt">
 
     <fieldset>
-      <legend>Order Details</fieldset>
+      <legend>Order Receipt</fieldset>
 
       <label>Name: </label>
       <span>
@@ -49,10 +57,14 @@ include_once("inc/navigation.html"); ?>
         <?=$_POST['address']?>
       </span>
 
+      <br>
+
       <label>Phone: </label>
       <span>
-        <?=$_POST['phone']?>
+        <?=$_POST['mobile-phone']?>
       </span>
+
+      <br>
 
       <label>Delivery Method: </label>
       <span>
@@ -73,20 +85,28 @@ include_once("inc/navigation.html"); ?>
 ?>
       </span>
 
+      <br>
+
       <label>Items Ordered:</label>
 
-<?php foreach (a2_cart_tabulated() as $item): ?>
+<?php foreach (a2_cart_tabulate($products) as $item): ?>
 
-      - <span class="receipt-qty">$item['qty']x</span>
-      <span class="receipt-item">$item['name'] @ </span>
-      <span class="receipt-price priceformat">$item['price']</span>
-      <span class="receipt-subtotal priceformat"></span>
+      <div>
+        - <span class="receipt-qty"><?=$item['qty']?>x</span>
+        <span class="receipt-item"><?=$item['name']?> @ </span>
+        <span class="receipt-price priceformat"><?=$item['price']?></span>
+        <span class="receipt-subtotal priceformat"></span>
+      </div>
 
 <?php endforeach; ?>
 
     </fieldset>
 
+    <hr>
+
   </section>
+
+<?php include_once("handlers/makereceipt.php"); ?>
 
 <?php else: ?>
 
@@ -105,21 +125,21 @@ include_once("inc/navigation.html"); ?>
 
         <div class="form-group">
           <label for="first-name">First Name: </label>
-          <input id="first-name" type="text" value="<?=$_SESSION['user']['FirstName']?>" required/>
+          <input id="first-name" name="first-name" type="text" value="<?=$_SESSION['user']['FirstName']?>" required/>
           <label for="last-name">First Name: </label>
-          <input id="last-name" type="text" value="<?=$_SESSION['user']['LastName']?>" required/>
+          <input id="last-name" name="last-name" type="text" value="<?=$_SESSION['user']['LastName']?>" required/>
         </div>
 
         <div class="form-group">
           <label for="address">Address: </label> <br>
-          <textarea id="address" columns="200" required></textarea>
+          <textarea id="address" name="address" width="200" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="email">Email: </label>
-          <input type="email" id="email" required/>
+          <input type="email" id="email" name="email" value="<?=$_SESSION['user']['Email']?>" required/>
           <label for="mobile-phone">Mobile: </label>
-          <input type="type" id="mobile-phone" pattern="^(?:\(?04\)?|\(?\+614\)?\s?)[\s](?:[\-\s]?\d\d\d\d){2}$" required />
+          <input type="type" id="mobile-phone" name="mobile-phone" pattern="^(?:\(?04\)?|\(?\+614\)?\s?)[\s](?:[\-\s]?\d\d\d\d){2}$" value="<?=$_SESSION['user']['Phone']?>" required />
         </div>
 
       </fieldset>
@@ -179,7 +199,7 @@ include_once("inc/navigation.html"); ?>
       </div>
 
       <div class="form-group">
-        <button class="btn btn-lg btn-primary" id="add">Checkout</button>
+        <button class="btn btn-lg btn-primary" id="add" name="submit" value="true">Checkout</button>
       </div>
 
     </form>
