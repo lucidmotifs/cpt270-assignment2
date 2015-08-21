@@ -278,6 +278,11 @@ input:valid {
 	display: inline-block;
 }
 
+label {
+	display:inline-block;
+	min-width:140px;
+}
+
 /***** Footer *****/
 
 footer {

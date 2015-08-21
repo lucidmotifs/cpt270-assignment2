@@ -33,16 +33,73 @@ include_once("inc/navigation.html"); ?>
 
     <form id="checkout-form" action="checkout.php" method="post">
 
+      <fieldset>
+        <legend>User Details</legend>
+
+        <div class="form-group">
+          <label for="first-name">First Name: </label>
+          <input id="first-name" type="text" value="<?=$_SESSION['user']['FirstName']?>" required/>
+          <label for="last-name">First Name: </label>
+          <input id="last-name" type="text" value="<?=$_SESSION['user']['LastName']?>" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address: </label> <br>
+          <textarea id="address" columns="200" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" id="email" required/>
+          <label for="mobile-phone">Mobile: </label>
+          <input type="type" id="mobile-phone" pattern="^(?:\(?04\)?|\(?\+614\)?\s?)[\s](?:[\-\s]?\d\d\d\d){2}$" required />
+        </div>
+
+      </fieldset>
+
       <div class="form-group">
-        <label for="first-name">First Name: </label>
-        <input id="first-name" type="text" value="<?=$_SESSION['user']['FirstName']?>" required/>
-        <label for="last-name">First Name: </label>
-        <input id="last-name" type="text" value="<?=$_SESSION['user']['LastName']?>" required/>
+        <label for="post-method">Delivery Method: </label> <br>
+        <input type="radio" name="post-method" id="post-method" value="1" checked>Regular Post <br>
+        <input type="radio" name="post-method" id="post-method" value="2" >Courier <br>
+        <input type="radio" name="post-method" id="post-method" value="3" >Express Courier <br>
       </div>
 
       <div class="form-group">
-        <label for="address">Address: </label> <br>
-        <textarea id="address" required></textarea>
+        <label for="credit-card-no">Credit Card Number: </label>
+        <input type="text" name="credit-card-no" id="credit-card-no" pattern="^[\d\s]{13,19}$" required />
+      </div>
+
+      <div class="form-group">
+        <label for="expiry-month">Expiry: </label>
+        <select name="expiry-month" id="expiry-month">
+          <option value="1">01</option>
+          <option value="2">02</option>
+          <option value="3">03</option>
+          <option value="4">04</option>
+          <option value="5">05</option>
+          <option value="6">06</option>
+          <option value="7">07</option>
+          <option value="8">08</option>
+          <option value="9">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        /
+        <select name="expiry-year" id="expiry-year">
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="checkbox" name="newsletter" id="newsletter" value="yes">
+          Please sign me up for the newsletter!
+        </input>
       </div>
 
       <div class="form-group">

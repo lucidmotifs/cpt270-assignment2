@@ -37,6 +37,6 @@ return.
 
 CART PAGE
 
-- Create cart.php source file to handle cart actions.
-- Add Cart Session variable
+- Create cart.php source file to handle cart actions. -
+- Add Cart Session variable. -
 - Create table of products in cart with price / quantity
