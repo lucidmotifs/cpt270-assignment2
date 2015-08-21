@@ -1,5 +1,20 @@
 <?php
 
+# Took the below snippet from the PHP docs as I didn't realise the version_compare
+# of PHP was < 5.6.0 on titan
+if(!function_exists('hash_equals')) {
+  function hash_equals($str1, $str2) {
+    if(strlen($str1) != strlen($str2)) {
+      return false;
+    } else {
+      $res = $str1 ^ $str2;
+      $ret = 0;
+      for($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
+      return !$ret;
+    }
+  }
+}
+
 function a2_session_test() {
   // Debugging purposes
   error_reporting( E_ALL );
@@ -41,7 +56,7 @@ function a2_session_init() {
     return;
   } else {
     // No user loogged on, check guest variables set
-    if ( isset ( $_SESSION['FirstName'] ) && $_SESSION['FirstName'] == 'Guest' ) {
+    if ( isset ( $_SESSION['user']['FirstName'] ) && $_SESSION['user']['FirstName'] == 'Guest' ) {
       $_SESSION['level'] = '1';
       return;
     } else {

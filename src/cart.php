@@ -14,6 +14,12 @@ function a2_cart_update_item($q, $id) {
   return 1;
 }
 
+function a2_check_cart() {
+  foreach($_SESSION['cart'] as $k => $item)
+    if ($item['quantity'] == 0)
+      unset($_SESSION['cart'][$k]);
+}
+
 function a2_cart_tabulate($products) {
   $item = array();
   // Loop through cart creating item array for each.

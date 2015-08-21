@@ -79,29 +79,25 @@ if ( isset($_SESSION['auth']) ) {
 <script>
   // Order submission AJAX Handler
   $(document).ready(function() {
-     $("#add_err").css('display', 'none', 'important');
-     $("#addForm").submit(function(e) {
-       e.preventDefault();
-       qty=$("#qty").val();
-       id=$("#productID").val();
-       $.post(
-         "handlers/addproduct.php",
-         { quantity: qty, product: id },
-         function(returnedData, status) {
-           if (status=="success") {
-             $("#results").html(returnedData);
-             // Update user details in future.
-             // Instead of refreshing page or moving to index,
-             // simply update the content of the user details
-             // section by implementing an iframe.
-           } else {
-             $("#add_err").css('display', 'inline', 'important');
-             $("#add_err").html("<img src='img/alert.png' /> Errors");
-           }
-         }).done(function(returnedData) {
-           $("#cartitems").html(returnedData);
-         });
-       });
+    $("#add_err").css('display', 'none', 'important');
+    $("#addForm").submit(function(e) {
+      e.preventDefault();
+      qty=$("#qty").val();
+      id=$("#productID").val();
+      $.post(
+        "handlers/addproduct.php",
+        { quantity: qty, product: id },
+        function(returnedData, status) {
+          if (status=="success") {
+            window.location.assign("products.php");
+          } else {
+            $("#add_err").css('display', 'inline', 'important');
+            $("#add_err").html("<img src='img/alert.png' /> Errors");
+          }
+        }).done(function(returnedData) {
+          $("#cartitems").html(returnedData);
+        });
+      }); 
     $("#unit-price").priceFormat({prefix: '$ ', centsLimit: 0});
     return false;
   });

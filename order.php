@@ -5,6 +5,7 @@ include_once("src/products.php");
 include_once("src/cart.php");
 
 a2_session_init();
+a2_check_cart();
 
 // Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
@@ -40,9 +41,15 @@ include_once("inc/navigation.html"); ?>
           <th width="15%">Subtotal</th>
         </tr>
 
-<?php
-foreach (a2_cart_tabulate($products) as $item) {
-?>
+<?php if ( empty($_SESSION['cart']) ): ?>
+
+        <tr>
+          <td colspan="4">There are no items in your cart!</td>
+        </tr>
+
+<?php else: ?>
+
+<?php foreach (a2_cart_tabulate($products) as $item): ?>
 
         <tr>
           <td><?=$item['name']?></td>
@@ -55,7 +62,9 @@ foreach (a2_cart_tabulate($products) as $item) {
           <td id="subtotal-<?=$item['id']?>" class="subtotal right priceformat"><?=$item['subtotal']?></td>
         </tr>
 
-<?php } ?>
+<?php endforeach;
+
+endif; ?>
 
       </table>
 

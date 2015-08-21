@@ -5,6 +5,7 @@ include_once("src/products.php");
 include_once("src/cart.php");
 
 a2_session_init();
+a2_check_cart();
 
 // Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
@@ -23,12 +24,77 @@ include_once("inc/navigation.html"); ?>
 <!-- Content Area -->
 <main class="container">
 
-<?php if (!empty($_POST['submit'])): ?>
-
 <?php
-// Do server-side verification of user input
+$error = array();
+
+if ( !empty($_POST['submit']) ) {
+
+  // Do server-side verification of user input
+
+  // fist name section
+  if (empty($_POST['first-name']))
+    $error[] = 'First Name must not be empty';
+
+  // last name section
+  if (empty($_POST['last-name']))
+    $error[] = 'Last Name must not be empty';
+
+  // address set
+  if (empty($_POST['address']))
+    $error[] = 'Address must not be empty';
+
+  // email set, pattern
+  if (empty($_POST['email']))
+    $error[] = 'Email must not be empty';
+    $regex = '/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/';
+    if ( !preg_match( $regex, $_POST['email'] ) )
+      $error[] = 'Email must be valid';
+
+  // mobile phone set, pattern
+  if (empty($_POST['mobile-phone']))
+    $error[] = 'First Name must not be empty';
+    $regex = '/^(?:\(?04\)?|\(?\+614\)?\s?)[\s](?:[\-\s]?\d\d\d\d){2}$/';
+    if ( !preg_match( $regex, $_POST['mobile-phone'] ) )
+      $error[] = 'Mobile Number must be valid';
+
+  // delivery method between 1-3
+  if (empty($_POST['post-method']))
+    $error[] = 'Postage Method must not be empty';
+    if ( !($_POST['post-method'] >= 1) || !($_POST['email'] <= 3) )
+      $error[] = 'Postage Method must be valid';
+
+  // credit card set, pattern
+  if (empty($_POST['first-name']))
+    $error[] = 'First Name must not be empty';
+    $regex = '/^[\d\s]{13,19}$/';
+    if ( !preg_match( $regex, $_POST['credit-card-no'] ) )
+      $error[] = 'Credit Card Number must be valid';
+
+  // expiry month set, 1-12
+  if (empty($_POST['expiry-month']))
+    $error[] = 'Expiry Month must not be empty';
+    if ( !($_POST['expiry-month'] >= 1) || !($_POST['expiry-month'] <= 12) )
+      $error[] = 'Expiry Month must be valid';
+
+  // expiry year set, 15 or greater
+  if (empty($_POST['expiry-year']))
+    $error[] = 'Expiry Year must not be empty';
+    if ( !($_POST['expiry-year'] >= 15) )
+      $error[] = 'Expiry Year must be valid';
+
+  // date is greater than now()
+  $now = time();
+  // Set to last day of the expiry month
+  $expiry = mktime(0, 0, 0, $_POST['expiry-month']+1, 0, $_POST['expiry-year']);
+
+  if ( time() > date('U', $expiry) )
+    $error[] = 'Credit Card has expired';
+
+}
 
 ?>
+
+<?php if ( empty($error) && !empty($_POST['submit']) ): ?>
 
 <!-- Content Area -->
 <main class="container">
@@ -85,7 +151,7 @@ include_once("inc/navigation.html"); ?>
 ?>
       </span>
 
-      <br>
+      <br><br>
 
       <label>Items Ordered:</label>
 
@@ -95,10 +161,15 @@ include_once("inc/navigation.html"); ?>
         - <span class="receipt-qty"><?=$item['qty']?>x</span>
         <span class="receipt-item"><?=$item['name']?> @ </span>
         <span class="receipt-price priceformat"><?=$item['price']?></span>
-        <span class="receipt-subtotal priceformat"></span>
+        &#40;<span class="receipt-subtotal priceformat"><?=$item['qty'] * $item['price']?></span>&#41;
       </div>
 
 <?php endforeach; ?>
+
+      <div>
+        <span>Total Price: </span>
+        <span class="priceformat" id="order-total"></span>
+      </div>
 
     </fieldset>
 
@@ -106,9 +177,26 @@ include_once("inc/navigation.html"); ?>
 
   </section>
 
+  <script>
+    function getOrderTotal() {
+      total = 0;
+      $(".receipt-subtotal").each(function( index ) {
+        total += +$(this).text().replace('$','').replace(/,/g,'');
+      });
+      $("#order-total").html(total).priceFormat({prefix: '$', centsLimit: 0});
+    }
+    getOrderTotal();
+    $("#cartitems").html(0);
+
+    // Convert numbers to prices
+    $(".priceformat").each(function( index ) {
+      $(this).priceFormat({prefix: '$', centsLimit: 0});
+    });
+  </script>
+
 <?php include_once("handlers/makereceipt.php"); ?>
 
-<?php else: ?>
+<?php elseif ( !empty($error) || empty($_POST['submit']) ): ?>
 
   <section id="page-title">
     <h1>Checkout</h1>
@@ -117,6 +205,14 @@ include_once("inc/navigation.html"); ?>
   <hr>
 
   <section id="shop-cart">
+
+    <div id="errors">
+<?php foreach ($error as $e): ?>
+      <p><?=$e?></p>
+<?php endforeach; ?>
+    </div>
+
+    <br>
 
     <form id="checkout-form" action="checkout.php" method="post">
 
@@ -132,7 +228,12 @@ include_once("inc/navigation.html"); ?>
 
         <div class="form-group">
           <label for="address">Address: </label> <br>
-          <textarea id="address" name="address" width="200" required></textarea>
+          <textarea
+            id="address"
+            name="address"
+            style="width:471px;height:100px;"
+            required><?=!empty($_POST['address']) ? $_POST['address'] : ''?>
+          </textarea>
         </div>
 
         <div class="form-group">
@@ -205,6 +306,10 @@ include_once("inc/navigation.html"); ?>
     </form>
 
   </section>
+
+<?php else: ?>
+
+  <!-- shouldn't be here? naybe handle in future -->
 
 <?php endif; ?>
 

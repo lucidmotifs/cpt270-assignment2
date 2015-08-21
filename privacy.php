@@ -1,5 +1,13 @@
 <?php
-# Included for technical marking purposes - comment back in on submission
+// User authentication / session script.
+include_once("src/authenticate.php");
+include_once("src/products.php");
+include_once("src/cart.php");
+
+a2_session_init();
+a2_check_cart();
+
+// Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
 
 <?php

@@ -7,12 +7,12 @@
     <!-- bootstrap css file. freely available under MIT license,
     used for academic purposes -->
     <link
-      href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"
+      href="css/bootstrap.min.css"
       rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
     <!-- jQuery hosted by google -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/jquery.price_format.2.0.min.js"></script>
 
     <!-- Simple show/hide script for the login form -->
@@ -48,6 +48,7 @@
                   // simply update the content of the user details
                   // section by implementing an iframe.
 		            } else {
+                  alert(html);
 		              $("#add_err").css('display', 'inline', 'important');
 		              $("#add_err").html("<img src='img/alert.png' /> Wrong username or password");
 		            }
@@ -86,14 +87,18 @@
       </div>
 
       <!-- Log-in Form -->
-      <div id="login" style="display:none;position:absolute;border:solid 1px #000;top:100px;z-index:10;background:white;">
+      <div id="login">
         <div class="err" id="add_err"></div>
         <form action="./" method="post">
           <div class="form-group">
             <label for="username">Username:</label>
             <input name="username" id="username" size="14" />
+          </div>
+          <div class="form-group">
             <label for="password">Password:</label>
             <input name="password" id="password" type="password" size="14" />
+          </div>
+          <div class="form-group">
             <button class="btn btn-lg btn-primary" type="submit" name="submit" id="submit">
               Login
             </button>

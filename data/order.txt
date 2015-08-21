@@ -1,0 +1,13 @@
+Name: Alice Liddell
+Adress: 12
+Email: alice@wonderland.com
+Phone: (04) 8765 4321
+
+Delivery Method: Regular Post
+
+Order Details: 
+
+Harbour Bridge (2) $99,000,000 ($198,000,000)
+Millau Viaduct (2) $4,238,000,000 ($8,476,000,000)
+London Bridge (2) $48,000,000 ($96,000,000)
+Total Price: 8,770,000,000

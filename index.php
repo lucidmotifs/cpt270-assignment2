@@ -1,13 +1,14 @@
 <?php
 // User authentication / session script.
 include_once("src/authenticate.php");
-#a2_session_test();
+include_once("src/products.php");
+include_once("src/cart.php");
+
 a2_session_init();
-#a2_auth_init("Alice", "whi73r4bbit");
-#a2_auth_test();
+a2_check_cart();
+
 // Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
-
 <?php
 // Content include files
 include_once("inc/header.html");
@@ -48,7 +49,7 @@ include_once("inc/navigation.html"); ?>
         We hope our cuustomers find it even easier to find exactly what they need.</p>
       <p>Visit our <a href="products.php">products</a> page to inspect our
         first range of new products. Sate your desire for engineering excellence
-        by inspecting the <a href="single_product.html">featured product</a> and
+        by inspecting the <a href="products.php?p=3">featured product</a> and
         begin your journey to true happiness.</p>
       <br>
       <p>Because everyone should own a bridge.</p>

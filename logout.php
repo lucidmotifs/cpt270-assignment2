@@ -8,8 +8,8 @@ a2_session_init();
 a2_auth_end();
 
 // Testing - should always be guest
-echo $_SESSION['user']['FirstName'];
+//echo $_SESSION['user']['FirstName'];
+
+header('Location: https://titan.csit.rmit.edu.au/~s3550097/wp/a2/index.php');
 
 ?>
-
-<a href="index.php">Go Back</a>

@@ -1,8 +1,11 @@
 <?php
 // User authentication / session script.
 include_once("src/authenticate.php");
+include_once("src/products.php");
+include_once("src/cart.php");
 
 a2_session_init();
+a2_check_cart();
 
 // Included for technical marking purposes - comment back in on submission
 #include_once("/home/eh1/e54061/public_html/wp/debug.php"); ?>
@@ -26,7 +29,7 @@ include_once("inc/navigation.html"); ?>
 
 include_once("src/products.php");
 
-if ( isset($_GET['p']) ) {
+if ( isset($_GET['p']) && $_GET['p'] > 0 ) {
   $p = $products[$_GET['p']-1];
   include_once("inc/product.html");
 } else { ?>
@@ -53,7 +56,6 @@ foreach ($products as $p) {
   }
 
 ?>
-
       <!-- Product Template -->
       <li>
         <a href="products.php?p=<?= $p['id']; ?>">
