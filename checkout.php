@@ -20,8 +20,75 @@ include_once("inc/navigation.html"); ?>
   <img src="img/banner-bridge.jpg">
 </section>
 
+<?php if (!empty($_POST['submit'])): ?>
+
 <!-- Content Area -->
 <main class="container">
+
+  <section id="page-title">
+    <h1>Order Complete!</h1>
+  </section>
+
+  <hr>
+
+  <section id="receipt">
+
+    <fieldset>
+      <legend>Order Details</fieldset>
+
+      <label>Name: </label>
+      <span>
+        <?=$_POST['first-name']?>
+        <?=$_POST['last-name']?>
+      </span>
+
+      <br>
+
+      <label>Address: </label>
+      <span>
+        <?=$_POST['address']?>
+      </span>
+
+      <label>Phone: </label>
+      <span>
+        <?=$_POST['phone']?>
+      </span>
+
+      <label>Delivery Method: </label>
+      <span>
+<?php
+  switch ($_POST['post-method']) {
+	case 1:
+		echo 'Regular Post';
+		break;
+	case 2:
+		echo 'Courier';
+		break;
+	case 3:
+		echo 'Express Courier';
+		break;
+	default:
+		echo 'Error';
+	}
+?>
+      </span>
+
+      <label>Items Ordered:</label>
+
+<?php foreach (a2_cart_tabulated() as $item): ?>
+
+      - <span class="receipt-qty">$item['qty']x</span>
+      <span class="receipt-item">$item['name'] @ </span>
+      <span class="receipt-price priceformat">$item['price']</span>
+      <span class="receipt-subtotal priceformat"></span>
+
+<?php endforeach; ?>
+
+    </fieldset>
+
+  </section>
+
+<?php else: ?>
 
   <section id="page-title">
     <h1>Checkout</h1>
@@ -57,44 +124,53 @@ include_once("inc/navigation.html"); ?>
 
       </fieldset>
 
-      <div class="form-group">
-        <label for="post-method">Delivery Method: </label> <br>
-        <input type="radio" name="post-method" id="post-method" value="1" checked>Regular Post <br>
-        <input type="radio" name="post-method" id="post-method" value="2" >Courier <br>
-        <input type="radio" name="post-method" id="post-method" value="3" >Express Courier <br>
-      </div>
+      <fieldset>
+        <legend>Shipping Details</legend>
 
-      <div class="form-group">
-        <label for="credit-card-no">Credit Card Number: </label>
-        <input type="text" name="credit-card-no" id="credit-card-no" pattern="^[\d\s]{13,19}$" required />
-      </div>
+        <div class="form-group">
+          <label for="post-method">Delivery Method: </label> <br>
+          <input type="radio" name="post-method" id="post-method" value="1" checked>Regular Post <br>
+          <input type="radio" name="post-method" id="post-method" value="2" >Courier <br>
+          <input type="radio" name="post-method" id="post-method" value="3" >Express Courier <br>
+        </div>
 
-      <div class="form-group">
-        <label for="expiry-month">Expiry: </label>
-        <select name="expiry-month" id="expiry-month">
-          <option value="1">01</option>
-          <option value="2">02</option>
-          <option value="3">03</option>
-          <option value="4">04</option>
-          <option value="5">05</option>
-          <option value="6">06</option>
-          <option value="7">07</option>
-          <option value="8">08</option>
-          <option value="9">09</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-        </select>
-        /
-        <select name="expiry-year" id="expiry-year">
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-          <option value="19">19</option>
-          <option value="20">20</option>
-        </select>
-      </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Payment Details</legend>
+
+        <div class="form-group">
+          <label for="credit-card-no">Credit Card Number: </label>
+          <input type="text" name="credit-card-no" id="credit-card-no" pattern="^[\d\s]{13,19}$" required />
+        </div>
+
+        <div class="form-group">
+          <label for="expiry-month">Expiry: </label>
+          <select name="expiry-month" id="expiry-month">
+            <option value="1">01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          /
+          <select name="expiry-year" id="expiry-year">
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </fieldset>
 
       <div class="form-group">
         <input type="checkbox" name="newsletter" id="newsletter" value="yes">
@@ -109,6 +185,8 @@ include_once("inc/navigation.html"); ?>
     </form>
 
   </section>
+
+<?php endif; ?>
 
 </main>
 
